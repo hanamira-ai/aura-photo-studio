@@ -1,0 +1,6 @@
+{
+  "name": "aura PHOTO",
+  "description": "Boho-minimalist editorial photography studio website for aura PHOTO.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

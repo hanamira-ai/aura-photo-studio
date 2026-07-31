@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Jost", sans-serif;
+
+  --color-studio-bg: #FAF7F5;
+  --color-studio-text: #211A24;
+  --color-studio-accent: #6B4E9E;
+  --color-studio-magenta: #C6237E;
+}
+
+@layer utilities {
+  .bg-aura-gradient {
+    background: linear-gradient(135deg, #6B4E9E, #C6237E);
+  }
+  .text-aura-gradient {
+    background: linear-gradient(135deg, #6B4E9E, #C6237E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Custom subtle scrollbar and smooth animations */
+html {
+  font-family: var(--font-sans);
+  background-color: #FAF7F5;
+  color: #211A24;
+}
+
+h1, h2, h3, .font-playfair {
+  font-family: var(--font-serif);
+}
+
