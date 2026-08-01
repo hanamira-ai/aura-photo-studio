@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, MapPin, Phone, Send, CheckCircle2, ArrowRight, ArrowLeft, Check } from 'lucide-react';
 import { ApertureIcon } from './ApertureIcon';
 
@@ -23,7 +24,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-
+// EmailJS Configuration
+const SERVICE_ID = 'service_zhltmbl';
+const TEMPLATE_ID = 'template_g6gkmaf';
+const PUBLIC_KEY = 'vw8CC4dx3FzPBsqY1';
   React.useEffect(() => {
     if (initialService) {
       setFormData((prev) => ({ ...prev, serviceType: initialService }));
@@ -36,15 +40,36 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
     }
   }, [initialService]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 700);
-  };
+  setLoading(true);
+
+  try {
+    await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        serviceType: formData.serviceType,
+        sessionPackage: formData.sessionPackage,
+        date: formData.date,
+        participants: formData.participants,
+        message: formData.message,
+      },
+      PUBLIC_KEY
+    );
+
+    setSubmitted(true);
+  } catch (error) {
+    console.error("EmailJS Error:", error);
+    alert("Reservasi gagal dikirim. Silakan coba kembali.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleNext = () => {
     if (currentStep < 3) setCurrentStep((prev) => prev + 1);
@@ -134,7 +159,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                       HOTLINE STUDIO
                     </span>
                     <a
-                      href="tel:+18005550198"
+                      href="tel:+6285645405305"
                       className="text-sm text-[#211A24] font-medium hover:text-[#6B4E9E] transition-colors"
                     >
                       +62 856 45 405 305
