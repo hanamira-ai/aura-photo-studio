@@ -45,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({
           }`}
           title="Varian 1: Foto Latar Penuh"
         >
-          01. Photo Bleed Preview
+          01. Photo Bleed
         </button>
         <button
           onClick={() => setVariant('pastel')}
